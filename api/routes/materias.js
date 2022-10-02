@@ -12,6 +12,7 @@ router.get("/", (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+
 router.post("/", (req, res) => {
   
   models.materia

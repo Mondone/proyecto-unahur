@@ -12,6 +12,32 @@ router.get("/", (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
+//obtener carrera+materias
+/*
+router.get("/", (req, res,next) => {
+
+  models.materia.findAll({attributes: ["id","nombre","id_carrera"],
+      
+      /////////se agrega la asociacion 
+      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}]
+      ////////////////////////////////
+
+    }).then(materias => res.send(materias)).catch(error => { return next(error)});
+});*/
+
+router.get("/carreramaterias/:id", (req, res, next) => {
+  console.log("Esto es un mensaje para ver en consola");
+  models.carrera
+    .findAll({
+      attributes: ["id", "nombre"],
+      include: [{
+          as: 'tiene',
+          model:models.materia, attributes: ["id", "nombre"]}]
+    })
+    .then(materias => res.send(materias))
+    .catch(error => { return next(error)})
+});
+
 router.post("/", (req, res) => {
   models.carrera
     .create({ nombre: req.body.nombre })
