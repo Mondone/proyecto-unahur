@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_carrera'
     })
 
-    materia.hayMany(models.cursa,{
-      as: 'cursa',
+    materia.hasMany(models.cursa,{
+      as: 'cursando',
       foreignKey: 'id_materia'
     })
     
-  };
+  }
   return materia;
 };
 

@@ -50,6 +50,18 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/alumnosPorMateria/:id", (req, res, next) => {
+  models.materia
+    .findAll({
+      attributes: ["id", "nombre"],
+      include: [{
+          as: 'tiene',
+          model:models.cursa, attributes: ["id", "id_alumno", "id_materia"]}]
+    })
+    .then(materias => res.send(materias))
+    .catch(error => { return next(error)})
+});
+
 router.put("/:id", (req, res) => {
   const onSuccess = materia =>
     // Aca habria que revisar id_carrera y comentarios de error????????

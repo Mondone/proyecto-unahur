@@ -1,6 +1,6 @@
 'use strict';
 
-const { ForeignKeyConstraintError } = require("sequelize/types");
+// const { ForeignKeyConstraintError } = require("sequelize/types");
 
 module.exports = (sequelize, DataTypes) => {
   const cursa = sequelize.define('cursa', {
@@ -9,19 +9,17 @@ module.exports = (sequelize, DataTypes) => {
     id_alumno: DataTypes.INTEGER,
     id_materia: DataTypes.INTEGER
   }, {});
-  
-  cursa.associate = function(models) {
+  cursa.associate = function(models){
     
-    cursa.belongsTo(models.alumno,{
-      as: 'cursa en',
+    cursa.belongsTo(models.materia,{
+      as: 'cursando-en',
+      foreignKey: 'id_materia'
+    })
+    cursa.hasMany(models.alumno,{
+      as: 'cursa-en',
       foreignKey: 'id_alumno'
     })
 
-    cursa.belongsTo(models.materia,{
-      as: 'cursa en',
-      foreignKey: 'id_materia'
-    })
-
-  };
+  }
   return cursa;
 };
