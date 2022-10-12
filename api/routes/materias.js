@@ -52,6 +52,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const onSuccess = materia =>
+    // Aca habria que revisar id_carrera y comentarios de error????????
     materia
       .update({ nombre: req.body.nombre,
                 id_carrera: req.body.id_carrera 
