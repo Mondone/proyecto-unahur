@@ -3,13 +3,27 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
-  models.materia
+  let { page, see } = req.query; //obtengo valores que vienen en la ruta.
+  if(page){
+    models.materia
+    .findAll(
+      {
+        attributes: ["id", "nombre", "id_carrera"],
+        offset: parseInt(page),
+        limit: parseInt(see),
+        
+      })
+    .then(materias => res.send(materias))
+    .catch(() => res.sendStatus(500));
+  }else{
+    models.materia
     .findAll({
-      attributes: ["id", "nombre", "id_carrera"]
+      attributes: ["id", "nombre", "id_carrera"],
     })
     .then(materias => res.send(materias))
     .catch(() => res.sendStatus(500));
+  }
+
 });
 
 
