@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   alumno.associate = function(models) {
-    alumno.hasMany(models.cursa,{
-      as: 'cursa',
-      foreignKey: 'id_alumno'
-    })
     
+        alumno.hasMany(models.cursa, {
+          as: 'alumno-cursa',
+          foreignKey: 'id_alumno'
+        })
   }
   
   return alumno;

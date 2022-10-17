@@ -69,8 +69,13 @@ router.get("/alumnosPorMateria/:id", (req, res, next) => {
     .findAll({
       attributes: ["id", "nombre"],
       include: [{
-          as: 'cursando',
-          model:models.cursa, attributes: ["id", "id_alumno", "id_materia"]}]
+          as: 'materia-cursa',
+          model:models.cursa, attributes: ["id", "id_alumno", "id_materia"],
+          include: [{
+            as: 'alumno-cursa',
+            model: models.alumno, attributes: ["nombre"]
+          }]
+        }]
     })
     .then(materias => res.send(materias))
     .catch(error => { return next(error)})

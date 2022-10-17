@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     materia.hasMany(models.cursa,{
-      as: 'cursando',
+      as: 'materia-cursa',
       foreignKey: 'id_materia'
     })
     

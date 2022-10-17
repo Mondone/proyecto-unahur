@@ -12,12 +12,19 @@ module.exports = (sequelize, DataTypes) => {
   cursa.associate = function(models){
     
     cursa.belongsTo(models.materia,{
-      as: 'cursando',
-      foreignKey: 'id_materia'
+      as: 'materia-cursa',
+      foreignKey: 'id_materia' //id_materia
     })
+
+    cursa.belongsTo(models.alumno,{
+      as: 'alumno-cursa',
+      foreignKey: 'id_alumno'
+    })
+
+    
     cursa.hasMany(models.alumno,{
       as: 'cursa-en',
-      foreignKey: 'id_alumno'
+      foreignKey: 'id_alumno' //id_alumno
     })
 
   }
