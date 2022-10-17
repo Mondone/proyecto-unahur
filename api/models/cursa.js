@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   cursa.associate = function(models){
     
     cursa.belongsTo(models.materia,{
-      as: 'cursando-en',
+      as: 'cursando',
       foreignKey: 'id_materia'
     })
     cursa.hasMany(models.alumno,{
