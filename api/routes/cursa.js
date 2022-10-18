@@ -16,12 +16,18 @@ router.get("/", (req, res) => {
 
 
 router.post("/", (req, res) => {
-  models.cursa
+  let {id_alumno, id_materia,nota1,nota2} = req.body;
+  if(id_alumno === ""){
+    res.status(400).send("ID Alumno no puede ser vacío")
+  }else if(id_materia === ""){
+    res.status(400).send("ID Materia no puede ser vacío")
+  } else{
+    models.cursa
     .create({ 
-        id_alumno: req.body.id_alumno,
-        id_materia: req.body.id_materia,
-        nota1: req.body.nota1,
-        nota2: req.body.nota2
+        id_alumno: id_alumno,
+        id_materia: id_materia,
+        nota1: nota1,
+        nota2: nota2
      })
     .then(cursa => res.status(201).send({ id: cursa.id  }))
     .catch(error => {
@@ -33,7 +39,10 @@ router.post("/", (req, res) => {
         res.sendStatus(500)
       }
     });
+  }
+  
 });
+
 /*  HACER METODOS UPDATE PARA LAS NOTAS
 const findCursa = (id, { onSuccess, onNotFound, onError }) => {
   models.cursa

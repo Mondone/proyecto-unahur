@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var models = require("../models");
 
-
 router.get("/", (req, res) => {
   console.log("Esto es un mensaje para ver en consola");
   models.alumno
@@ -49,16 +48,16 @@ router.post("/", (req, res) => {
 const findAlumno = (id, { onSuccess, onNotFound, onError }) => {
   models.alumno
     .findOne({
-      attributes: ["id", "nombre", "alumno", "mail"],
+      attributes: ["id", "nombre", "apellido", "mail"],
       where: { id }
     })
-    .then(alumno => (alumno ? onSuccess(alumno) : onNotFound()))
+    .then(alumnos => (alumnos ? onSuccess(alumnos) : onNotFound()))
     .catch(() => onError());
 };
 
 router.get("/:id", (req, res) => {
   findAlumno(req.params.id, {
-    onSuccess: alumno => res.send(alumno),
+    onSuccess: alumnos => res.send(alumnos),
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
   });
