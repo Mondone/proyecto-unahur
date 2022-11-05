@@ -1,18 +1,74 @@
 const models = require("../models/");
 
-const findMateriaById = async (id) => {
 
+const addMateria = async(req,res) => {
+    console.log("Agregando materia...");
+    try {
+        const {cod_materia, nombre,id_carrera} = req.body;
+        console.log(cod_materia)
+        let mat = await findMateriaById(cod_materia);
+        if(!mat){
+            mat = await models.materia.create({cod_materia,nombre,id_carrera});
+            res.status(200).json({mat});
+        }else{
+            res.status(400).json({message: "Ya existe esa materia"})
+        }
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
+const getAllMaterias = async(req,res) => {
+    console.log("obteniendo materias...");
+    try {
+        let mats = await models.materia.findAll({});
+        res.status(200).json({mats})
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
+const updateMateria = async(req,res) => {
+    console.log("actualizando...");
+    try {
+        const cod_materia = req.params.id;
+        const {nombre,id_carrera} = req.body;
+       
+        console.log(cod_materia,nombre,id_carrera)
+        let mat = await findMateriaById(cod_materia);
+        if(mat){
+            mat = await models.materia.update({
+                nombre,
+                id_carrera
+            },{
+                where:{cod_materia}
+            })
+            res.status(200).json({mat});
+        } else{
+            res.status(400).json({message: "Materia no encontrada"})
+        }
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
+const findMateriaById = async (cod_materia) => {
+console.log("Estoy aca")
     try{
         const mat = await models.materia.findOne({
-            where: {id}
+            where: {cod_materia}
         })
-        console.log(alu)
-        return alu;    
+        console.log(mat)
+        return mat;    
     }catch(err){
         res.status(500).json({message: "UPS"})
     }
 
 }
 
-module.exports = { findMateriaById }
+module.exports = { 
+    addMateria,
+    getAllMaterias,
+    updateMateria
+ }
 

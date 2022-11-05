@@ -5,6 +5,7 @@ const carreraController = require("../controllers/carreraController");
 
 router.post("/", carreraController.addCarrera);
 router.get("/", carreraController.getAllCarreras);
+router.get("/materiascarrera/:id", carreraController.materiasPorCarrera);
 router.put("/:id", carreraController.updateCarrera);
 router.delete("/:id", carreraController.deleteCarrera);
 /*
@@ -30,7 +31,7 @@ router.get("/", (req, res,next) => {
 
     }).then(materias => res.send(materias)).catch(error => { return next(error)});
 });*/
-
+/*
 router.get("/carreramaterias/:id", (req, res, next) => {
   console.log("Esto es un mensaje para ver en consola");
   models.carrera
@@ -42,7 +43,7 @@ router.get("/carreramaterias/:id", (req, res, next) => {
     })
     .then(materias => res.send(materias))
     .catch(error => { return next(error)})
-});
+});*/
 /*
 router.post("/", (req, res) => {
   models.carrera

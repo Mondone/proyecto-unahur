@@ -66,6 +66,29 @@ const deleteCarrera = async(req,res) => {
         res.status(500).json({message: err})
     }
 }
+
+const materiasPorCarrera = async(req,res) =>{
+    console.log("listando materias...");
+    try {
+        const {id} = req.params;
+        const car = await findCarreraById(id);
+        console.log(car)
+        if(car){
+            const result = await models.carrera.findAll({
+                attributes: ["id", "nombre"],
+                include: [{
+                    as: 'tiene',
+                    model:models.materia, attributes: ["id", "nombre"]}]
+                })  
+        } else {
+            res.status(400).json({message: "Carrera no encontrada"})
+        }      
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+    
+}
+
 const findCarreraByNombre = async(nombre) =>{
     try{
         const car = await models.carrera.findOne({
@@ -92,5 +115,6 @@ module.exports = {
     addCarrera,
     getAllCarreras,
     updateCarrera,
-    deleteCarrera
+    deleteCarrera,
+    materiasPorCarrera
 }

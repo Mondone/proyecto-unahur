@@ -1,18 +1,10 @@
 const { check, validationResult } = require('express-validator');
 
 const validarInput = [
-    check('dni').exists().not().isEmpty().custom((value, {req}) => {
-        throw new Error("Verificar DNI")
-    }),
-    check('nombre').exists().not().isEmpty().custom((value, {req}) => {
-        throw new Error("Verificar Nombre")
-    }),
-    check('apellido').exists().not().isEmpty().custom((value, {req}) => {
-        throw new Error("Verificar Apellido")
-    }),
-    check('mail').exists().isEmail().custom((value, {req}) => {
-        throw new Error("Verificar Mail")
-    }),
+    check('dni').exists().not().isEmpty(),
+    check('nombre').exists().not().isEmpty(),
+    check('apellido').exists().not().isEmpty(),
+    check('mail').exists().isEmail(),
     (req,res,next) => {
         try{
             validationResult(req).throw();
