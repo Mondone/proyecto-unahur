@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'materia-cursa',
       foreignKey: 'id_materia' //id_materia
     })
-
+/*
     cursa.belongsTo(models.alumno,{
       as: 'alumno-cursa',
       foreignKey: 'id_alumno'
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'cursa-en',
       foreignKey: 'id_alumno' //id_alumno
     })
-
+*/
   }
   return cursa;
 };

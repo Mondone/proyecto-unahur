@@ -1,7 +1,16 @@
 var express = require("express");
 var router = express.Router();
 var models = require("../models");
+const alumnoController = require("../controllers/alumnoController");
+const { validarInput } = require("../middlewares/validator/alumno");
 
+router.get("/", alumnoController.getAllAlumnos);
+router.get("/:id", alumnoController.findAlumno)
+router.post("/", validarInput, alumnoController.addAlumno);
+router.put("/:id", alumnoController.updateAlumno);
+router.delete("/:id", alumnoController.deleteAlumno);
+router.post("/inscribir", alumnoController.inscribirAlumno);
+/* REEMPLAZADO
 router.get("/", (req, res) => {
   console.log("Esto es un mensaje para ver en consola");
   models.alumno
@@ -10,7 +19,7 @@ router.get("/", (req, res) => {
     })
     .then(alumnos => res.send(alumnos))
     .catch(() => res.sendStatus(500));
-});
+});*/
 
 // Get materias que cursa un alumno
 router.get("/alumnomateria/:id", (req, res, next) => {
@@ -25,7 +34,7 @@ router.get("/alumnomateria/:id", (req, res, next) => {
     .then(materias => res.send(materias))
     .catch(error => { return next(error)})
 });
-
+/* REEMPLAZADO
 router.post("/", (req, res) => {
   models.alumno
     .create({ 
@@ -61,8 +70,8 @@ router.get("/:id", (req, res) => {
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
   });
-});
-
+});*/
+/*
 router.put("/:id", (req, res) => {
   const onSuccess = alumno =>
     alumno
@@ -87,7 +96,7 @@ router.put("/:id", (req, res) => {
       onError: () => res.sendStatus(500)
     });
 });
-
+REEMPLAZADO
 router.delete("/:id", (req, res) => {
     const onSuccess = alumno =>
       alumno
@@ -99,6 +108,7 @@ router.delete("/:id", (req, res) => {
       onNotFound: () => res.sendStatus(404),
       onError: () => res.sendStatus(500)
     });
-});
+});*/
   
+
 module.exports = router;

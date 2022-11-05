@@ -1,7 +1,13 @@
 var express = require("express");
 var router = express.Router();
 var models = require("../models");
+const carreraController = require("../controllers/carreraController");
 
+router.post("/", carreraController.addCarrera);
+router.get("/", carreraController.getAllCarreras);
+router.put("/:id", carreraController.updateCarrera);
+router.delete("/:id", carreraController.deleteCarrera);
+/*
 router.get("/", (req, res) => {
   console.log("Esto es un mensaje para ver en consola");
   models.carrera
@@ -10,7 +16,7 @@ router.get("/", (req, res) => {
     })
     .then(carreras => res.send(carreras))
     .catch(() => res.sendStatus(500));
-});
+});*/
 
 //obtener carrera+materias
 /*
@@ -37,7 +43,7 @@ router.get("/carreramaterias/:id", (req, res, next) => {
     .then(materias => res.send(materias))
     .catch(error => { return next(error)})
 });
-
+/*
 router.post("/", (req, res) => {
   models.carrera
     .create({ nombre: req.body.nombre })
@@ -51,8 +57,8 @@ router.post("/", (req, res) => {
         res.sendStatus(500)
       }
     });
-});
-
+});*/
+/*
 const findCarrera = (id, { onSuccess, onNotFound, onError }) => {
   models.carrera
     .findOne({
@@ -61,7 +67,7 @@ const findCarrera = (id, { onSuccess, onNotFound, onError }) => {
     })
     .then(carrera => (carrera ? onSuccess(carrera) : onNotFound()))
     .catch(() => onError());
-};
+};*/
 
 router.get("/:id", (req, res) => {
   findCarrera(req.params.id, {
@@ -70,7 +76,7 @@ router.get("/:id", (req, res) => {
     onError: () => res.sendStatus(500)
   });
 });
-
+/*
 router.put("/:id", (req, res) => {
   const onSuccess = carrera =>
     carrera
@@ -90,8 +96,8 @@ router.put("/:id", (req, res) => {
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
   });
-});
-
+});*/
+/*
 router.delete("/:id", (req, res) => {
   const onSuccess = carrera =>
     carrera
@@ -103,6 +109,6 @@ router.delete("/:id", (req, res) => {
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
   });
-});
+});*/
 
 module.exports = router;
