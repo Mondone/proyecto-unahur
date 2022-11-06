@@ -77,9 +77,10 @@ const materiasPorCarrera = async(req,res) =>{
             const result = await models.carrera.findAll({
                 attributes: ["id", "nombre"],
                 include: [{
-                    as: 'tiene',
-                    model:models.materia, attributes: ["id", "nombre"]}]
-                })  
+                    as: 'tiene-mats',
+                    model:models.materia, attributes: ["cod_materia", "nombre"]}]
+                })
+            res.status(200).json({result})      
         } else {
             res.status(400).json({message: "Carrera no encontrada"})
         }      

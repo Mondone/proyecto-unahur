@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   //asociacion una carrera tiene muchas materias
   carrera.associate = function(models){
     carrera.hasMany(models.materia,{
-      as: 'tiene',
+      as: 'tiene-mats',
       foreignKey: 'id_carrera'
     })
   }

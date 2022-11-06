@@ -8,16 +8,6 @@ router.get("/", carreraController.getAllCarreras);
 router.get("/materiascarrera/:id", carreraController.materiasPorCarrera);
 router.put("/:id", carreraController.updateCarrera);
 router.delete("/:id", carreraController.deleteCarrera);
-/*
-router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
-  models.carrera
-    .findAll({
-      attributes: ["id", "nombre"]
-    })
-    .then(carreras => res.send(carreras))
-    .catch(() => res.sendStatus(500));
-});*/
 
 //obtener carrera+materias
 /*

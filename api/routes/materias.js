@@ -8,15 +8,7 @@ router.get("/", materiaController.getAllMaterias);
 router.put("/:id", materiaController.updateMateria);
 
 
-const findMateria = (id, { onSuccess, onNotFound, onError }) => {
-  models.materia
-    .findOne({
-      attributes: ["id", "nombre"],
-      where: { id }
-    })
-    .then(materia => (materia ? onSuccess(materia) : onNotFound()))
-    .catch(() => onError());
-};
+
 
 router.get("/:id", (req, res) => {
   findMateria(req.params.id, {
