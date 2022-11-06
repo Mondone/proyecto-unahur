@@ -21,7 +21,16 @@ const addMateria = async(req,res) => {
 const getAllMaterias = async(req,res) => {
     console.log("obteniendo materias...");
     try {
-        let mats = await models.materia.findAll({});
+        const {page,view} = req.query;
+        let mats;
+        if(page && view){
+            mats =  await models.materia.findAll({
+                                offset: parseInt(page),
+                                limit: parseInt(view),
+                    })
+        }else{
+            mats = await models.materia.findAll({});
+        }
         res.status(200).json({mats})
     } catch (err) {
         res.status(500).json({message: err})
