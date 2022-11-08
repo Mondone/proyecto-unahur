@@ -79,20 +79,52 @@ const deleteAlumno = async(req,res) => {
 }
 
 const inscribirAlumno = async(req,res) => {
-    console.log("Hola entre")
-    console.log(req.body)
-    res.send(req.body)
-    /*const {dni,id_materia} = req.params;
-    console.log(dni+" - " + id_materia)
-    res.send({dni})
-    try{
-       // let mat = await materiaController.findMateriaById(id_materia)
-        console.log(mat)
-        res.status(200).json({mat})
-    } catch(err){
-        res.status(500).json({message: "I am so so sorry"})
-    }*/
+    console.log("Inscribiendo ...")
+    try {
+        const {fecha,dni_alumno,cod_materia} = req.body;
+        //validar que no esten vacios con el Middelware..
+        const alu = await findAlumnoByDni(dni_alumno);
+        if(!alu){
+            res.status(400).json({message: "Alumno no existente"}) 
+        } else{
+            const mat = await materiaController.findMateriaById(cod_materia);
+            if(!mat){
+                res.status(400).json({message: "Materia no existente"})
+            } else {
+                const cursa = await models.cursa.create({
+                                        fecha,
+                                        dni_alumno,
+                                        cod_materia
+                                })
+                res.status(200).json({cursa})
+            }
+        }        
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
 }
+
+const getInscripciones = async(req,res) => {
+    console.log("Cursadas de un alumno...");
+    try {
+        const dni_alumno = req.params.id;
+        const alu = await findAlumnoByDni(dni_alumno);
+        if(!alu){
+            res.status(400).json({message: "Alumno no existente"});
+        }else{
+            const inscripciones = await models.alumno.findAll({
+                                    attributes: ["dni", "nombre","apellido"],
+                                    include: [{
+                                        as: 'tiene-curs',
+                                        model:models.cursa }]
+            })
+            res.status(200).json({inscripciones});
+        }
+    } catch (error) {
+        
+    }
+
+ }
 //obtener alumno por params
 const findAlumno = async (req,res) => {
     const dni = req.params.id;
@@ -130,5 +162,6 @@ module.exports = {
     inscribirAlumno,
     getAllAlumnos,
     updateAlumno,
-    deleteAlumno
+    deleteAlumno,
+    getInscripciones
 }

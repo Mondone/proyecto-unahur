@@ -14,35 +14,6 @@ router.get("/", (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-/*Esto no puede estar acá*/
-router.post("/", (req, res) => {
-  let {id_alumno, id_materia,nota1,nota2} = req.body;
-  if(id_alumno === ""){
-    res.status(400).send("ID Alumno no puede ser vacío")
-  }else if(id_materia === ""){
-    res.status(400).send("ID Materia no puede ser vacío")
-  } else{
-    /*faltaría poder validar que exista el alumno y la materia pero no entiendo como poder invocar el "findAlumno" */
-    models.cursa
-    .create({ 
-        id_alumno: id_alumno,
-        id_materia: id_materia,
-        nota1: nota1,
-        nota2: nota2
-     })
-    .then(cursa => res.status(201).send({ id: cursa.id  }))
-    .catch(error => {
-      if (error == "SequelizeUniqueConstraintError: Validation error") {
-        res.status(400).send('Bad request: ya existe el curso con el mismo id')
-      }
-      else {
-        console.log(`Error al intentar insertar en la base de datos: ${error}`)
-        res.sendStatus(500)
-      }
-    });  
-  }
-
-});
 
 /*  HACER METODOS UPDATE PARA LAS NOTAS
 const findCursa = (id, { onSuccess, onNotFound, onError }) => {

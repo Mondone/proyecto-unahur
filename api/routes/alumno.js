@@ -10,16 +10,7 @@ router.post("/", validarInput, alumnoController.addAlumno);
 router.put("/:id", alumnoController.updateAlumno);
 router.delete("/:id", alumnoController.deleteAlumno);
 router.post("/inscribir", alumnoController.inscribirAlumno);
-/* REEMPLAZADO
-router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
-  models.alumno
-    .findAll({
-      attributes: ["id", "nombre"]
-    })
-    .then(alumnos => res.send(alumnos))
-    .catch(() => res.sendStatus(500));
-});*/
+router.get("/obtenerinscripciones/:id", alumnoController.getInscripciones);
 
 // Get materias que cursa un alumno
 router.get("/alumnomateria/:id", (req, res, next) => {

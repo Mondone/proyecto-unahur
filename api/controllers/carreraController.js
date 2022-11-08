@@ -78,7 +78,7 @@ const materiasPorCarrera = async(req,res) =>{
                 attributes: ["id", "nombre"],
                 include: [{
                     as: 'tiene-mats',
-                    model:models.materia, attributes: ["cod_materia", "nombre"]}]
+                    model:models.materia}]
                 })
             res.status(200).json({result})      
         } else {

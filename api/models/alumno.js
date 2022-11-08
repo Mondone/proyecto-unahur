@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   alumno.associate = function(models) {
     // associations can be defined here
+    alumno.hasMany(models.cursa,{
+      as:'tiene-curs',
+      foreignKey: 'dni_alumno'
+    })
   };
   return alumno;
 };

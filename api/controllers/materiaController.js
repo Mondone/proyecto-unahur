@@ -78,6 +78,7 @@ console.log("Estoy aca")
 module.exports = { 
     addMateria,
     getAllMaterias,
-    updateMateria
+    updateMateria,
+    findMateriaById
  }
 
