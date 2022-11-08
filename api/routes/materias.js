@@ -5,11 +5,13 @@ const materiaController = require("../controllers/materiaController");
 
 router.post("/", materiaController.addMateria);
 router.get("/", materiaController.getAllMaterias);
+router.get("/:id", materiaController.findMateriaById);
 router.put("/:id", materiaController.updateMateria);
+router.delete("/:id", materiaController.deleteMateria); // id o cod_materia para el borrado???
 
+// eze router.get("/:id", materiaController.findMateriaById);
 
-
-
+/*
 router.get("/:id", (req, res) => {
   findMateria(req.params.id, {
     onSuccess: materia => res.send(materia),
@@ -17,6 +19,8 @@ router.get("/:id", (req, res) => {
     onError: () => res.sendStatus(500)
   });
 });
+*/
+// Alumnos por materia hay que transformarlo y sacarlo de aca ???
 
 router.get("/alumnosPorMateria/:id", (req, res, next) => {
   models.materia
@@ -35,6 +39,7 @@ router.get("/alumnosPorMateria/:id", (req, res, next) => {
     .catch(error => { return next(error)})
 });
 
+/* este hay que borrarlo no??
 router.delete("/:id", (req, res) => {
   const onSuccess = materia =>
     materia
@@ -47,5 +52,6 @@ router.delete("/:id", (req, res) => {
     onError: () => res.sendStatus(500)
   });
 });
+*/
 
 module.exports = router;

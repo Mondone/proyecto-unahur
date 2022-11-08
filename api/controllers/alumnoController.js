@@ -43,15 +43,12 @@ const updateAlumno = async(req,res) => {
                 apellido,
                 mail
             },{
-                where:{
-                    dni
-                }
+                where:{dni}
             })
             res.status(200).json({alu});
         } else{ 
             res.status(400).json({message: "DNI no encontrado para actualizar"})
-        }
-        
+        }  
     }catch(err){
         res.status(500).json({message: err})
     }
@@ -65,9 +62,7 @@ const deleteAlumno = async(req,res) => {
         let alu = await findAlumnoByDni(dni);
         if(alu){
             alu = await models.alumno.destroy({
-                where: {
-                    dni
-                }
+                where: {dni}
             })
             res.status(200).json({alu})
         }else{
@@ -139,7 +134,6 @@ const findAlumno = async (req,res) => {
     }catch(err){
         res.status(500).json({message: err})
     }
-
 }
 
 const findAlumnoByDni = async (dni) => {
@@ -152,7 +146,6 @@ const findAlumnoByDni = async (dni) => {
     }catch(err){
         res.status(500).json({message: "UPS"})
     }
-
 }
 
 module.exports = {

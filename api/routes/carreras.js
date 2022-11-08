@@ -5,9 +5,22 @@ const carreraController = require("../controllers/carreraController");
 
 router.post("/", carreraController.addCarrera);
 router.get("/", carreraController.getAllCarreras);
+router.get("/:id",carreraController.findCarreraById);
 router.get("/materiascarrera/:id", carreraController.materiasPorCarrera);
 router.put("/:id", carreraController.updateCarrera);
 router.delete("/:id", carreraController.deleteCarrera);
+
+// eze agregue router.get("/:id",carreraController.findCarreraById);
+/* 
+router.get("/:id", (req, res) => {
+  findCarrera(req.params.id, {
+    onSuccess: carrera => res.send(carrera),
+    onNotFound: () => res.sendStatus(404),
+    onError: () => res.sendStatus(500)
+  });
+});
+
+*/
 
 //obtener carrera+materias
 /*
@@ -60,13 +73,7 @@ const findCarrera = (id, { onSuccess, onNotFound, onError }) => {
     .catch(() => onError());
 };*/
 
-router.get("/:id", (req, res) => {
-  findCarrera(req.params.id, {
-    onSuccess: carrera => res.send(carrera),
-    onNotFound: () => res.sendStatus(404),
-    onError: () => res.sendStatus(500)
-  });
-});
+
 /*
 router.put("/:id", (req, res) => {
   const onSuccess = carrera =>
