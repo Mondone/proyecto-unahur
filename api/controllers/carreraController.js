@@ -12,7 +12,6 @@ const addCarrera = async (req,res) => {
         } else{
             res.status(400).json({message: "Ya existe esa Carrera"})
         }
-        
     } catch (err) {
         res.status(500).json({message: err})
     }
@@ -115,6 +114,7 @@ const findCarreraById = async(id) => {
 module.exports = {
     addCarrera,
     getAllCarreras,
+    findCarreraById,
     updateCarrera,
     deleteCarrera,
     materiasPorCarrera

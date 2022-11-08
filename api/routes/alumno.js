@@ -4,12 +4,13 @@ var models = require("../models");
 const alumnoController = require("../controllers/alumnoController");
 const { validarInput } = require("../middlewares/validator/alumno");
 
-router.get("/", alumnoController.getAllAlumnos);
-router.get("/:id", alumnoController.findAlumno)
 router.post("/", validarInput, alumnoController.addAlumno);
+router.post("/inscribir", alumnoController.inscribirAlumno);
+router.get("/", alumnoController.getAllAlumnos);
+router.get("/:id", alumnoController.findAlumno);
 router.put("/:id", alumnoController.updateAlumno);
 router.delete("/:id", alumnoController.deleteAlumno);
-router.post("/inscribir", alumnoController.inscribirAlumno);
+
 /* REEMPLAZADO
 router.get("/", (req, res) => {
   console.log("Esto es un mensaje para ver en consola");

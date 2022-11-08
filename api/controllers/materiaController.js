@@ -61,6 +61,24 @@ const updateMateria = async(req,res) => {
     }
 }
 
+const deleteMateria = async(req,res) => {
+    console.log("Elimando materia....");
+    try {
+        const {id} = req.params; // borramos por id o mejor por cod_materia???
+        let mat = await findMateriaById(id);
+        if(mat){
+            mat = await models.materia.destroy({
+                where: {id}
+            })
+            res.status(200).json({mat})
+        }else{
+            res.status(400).json({message: "El ID de esta materia no fue encontrado"})
+        }
+    } catch (err) {
+        res.status(500).json({message: err})
+    }
+}
+
 const findMateriaById = async (cod_materia) => {
 console.log("Estoy aca")
     try{
@@ -78,6 +96,8 @@ console.log("Estoy aca")
 module.exports = { 
     addMateria,
     getAllMaterias,
-    updateMateria
+    findMateriaById,
+    updateMateria,
+    deleteMateria
  }
 
