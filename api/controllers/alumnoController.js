@@ -99,6 +99,27 @@ const inscribirAlumno = async(req,res) => {
     }
 }
 
+const deleteInscripcion = async (req,res) => {
+    console.log("Borrando inscripcion...")
+    const {dni_alumno,cod_materia} = req.query;
+    const alu = await findAlumnoByDni(dni_alumno);
+    if(!alu){
+        res.status(400).json({message: "Alumno no existente"});
+    } else{
+        const mat = await materiaController.findMateriaById(cod_materia);
+        if(!mat) {
+            res.status(400).json({message: "Materia no existente"});
+        } else {
+            const inscripcion = await models.cursa.destroy({
+                where:{
+                    dni_alumno,
+                    cod_materia}
+            })
+            res.status(200).json({message: inscripcion})
+        }
+    }
+}
+
 const getInscripciones = async(req,res) => {
     console.log("Cursadas de un alumno...");
     try {
@@ -156,5 +177,6 @@ module.exports = {
     getAllAlumnos,
     updateAlumno,
     deleteAlumno,
-    getInscripciones
+    getInscripciones,
+    deleteInscripcion
 }

@@ -64,11 +64,12 @@ const updateMateria = async(req,res) => {
 const deleteMateria = async(req,res) => {
     console.log("Elimando materia....");
     try {
-        const {id} = req.params; // borramos por id o mejor por cod_materia???
-        let mat = await findMateriaById(id);
+
+        const {cod_materia} = req.params; 
+        let mat = await findMateriaById(cod_materia);
         if(mat){
             mat = await models.materia.destroy({
-                where: {id}
+                where: {cod_materia}
             })
             res.status(200).json({mat})
         }else{
