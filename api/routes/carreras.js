@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const carreraController = require("../controllers/carreraController");
+const { validarInput } = require("../middlewares/validator/carrera");
 
-router.post("/", carreraController.addCarrera);
+router.post("/", validarInput, carreraController.addCarrera);
 router.get("/", carreraController.getAllCarreras);
 router.get("/:id",carreraController.findCarreraById);
 router.get("/materiascarrera/:id", carreraController.materiasPorCarrera);

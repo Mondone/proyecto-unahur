@@ -1,10 +1,9 @@
 const { check, validationResult } = require('express-validator');
 
 const validarInput = [
-    check('dni').exists().isNumeric().isLength({min:8,max:8}), // al poner isLength ya no es necessario el no es vacio???
+    check('cod_materia').exists().isNumeric().not().isEmpty(),
     check('nombre').exists().not().isEmpty(),
-    check('apellido').exists().not().isEmpty(),
-    check('mail').exists().isEmail(),
+    check('id_carrera').exists().isNumeric().not().isEmpty(),
     (req,res,next) => {
         try{
             validationResult(req).throw();
