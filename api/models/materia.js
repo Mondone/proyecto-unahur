@@ -1,7 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const materia = sequelize.define('materia', {
-    cod_materia: DataTypes.INTEGER,
+    cod_materia: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+      },
     nombre: DataTypes.STRING,
     id_carrera: DataTypes.INTEGER
   }, {});
@@ -11,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'pertenece-a-car',
       foreignKey: 'id_carrera'
     })
-    /*materia.hasMany(models.cursa,{
+    materia.hasMany(models.cursa,{
       as: 'tiene-curs',
       foreignKey: 'cod_materia'
-    })*/
+    })
   };
   return materia;
 };

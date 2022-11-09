@@ -130,10 +130,16 @@ const getInscripciones = async(req,res) => {
         }else{
             const inscripciones = await models.alumno.findAll({
                                     attributes: ["dni", "nombre","apellido"],
-                                    include: [{
-                                        as: 'tiene-curs',
-                                        model:models.cursa }]
-            })
+                                    include: [
+                                        {
+                                         as: 'tiene-curs',
+                                         model:models.cursa,
+                                         include: [{
+                                            as: 'pertenece-a-mat',
+                                            model: models.materia
+                                         }]
+                                        }]
+                                })
             res.status(200).json({inscripciones});
         }
     } catch (error) {

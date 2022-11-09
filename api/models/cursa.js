@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'dni_alumno'
     })
 
-    /*cursa.belongsTo(models.materia,{
+    cursa.belongsTo(models.materia,{
       as: 'pertenece-a-mat',
       foreignKey: 'cod_materia'
-    })*/
+    })
   };
   return cursa;
 };
