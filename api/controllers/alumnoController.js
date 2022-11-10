@@ -147,7 +147,7 @@ const getInscripciones = async(req,res) => {
     }
 
  }
-//obtener alumno por params
+//obtener alumno por params!
 const findAlumno = async (req,res) => {
     const dni = req.params.id;
     console.log("soy el dni" + dni);
