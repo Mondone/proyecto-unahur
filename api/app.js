@@ -7,6 +7,8 @@ var carrerasRouter = require('./routes/carreras');
 var materiasRouter = require('./routes/materias');
 var alumnoRouter = require('./routes/alumno');
 var cursaRouter = require('./routes/cursa');
+var usuarioRouter = require('./routes/usuario');
+
 var app = express();
 // Token
 const jwt = require('jsonwebtoken');
@@ -93,6 +95,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/car', carrerasRouter);
+app.use('/usr', usuarioRouter);
 app.use('/mat',materiasRouter);
 app.use('/alu',alumnoRouter);
 app.use('/cur',cursaRouter);

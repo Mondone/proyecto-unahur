@@ -174,7 +174,21 @@ const findAlumnoByDni = async (dni) => {
         res.status(500).json({message: "UPS"})
     }
 }
+/* FALTA VER EL TEMA DE LA ACTUALIZACION DE MATERIA.
+const actualizarNotas = async(alu,nota1,nota2) =>{
+    try {
+        alu = await models.alumno.update({
+            nota1,
+            nota2
+        },{
+            where:{dni: alu.dni}
+        })
+        return alu;
+    } catch (error) {
+        res.status(500).json({message: error})
+    }
 
+}*/
 module.exports = {
     findAlumnoByDni,
     findAlumno,
@@ -184,5 +198,6 @@ module.exports = {
     updateAlumno,
     deleteAlumno,
     getInscripciones,
-    deleteInscripcion
+    deleteInscripcion,
+    actualizarNotas
 }
