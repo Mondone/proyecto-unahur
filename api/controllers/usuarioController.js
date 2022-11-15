@@ -2,6 +2,7 @@ const models = require("../models/");
 const bcrypt = require("bcrypt");
 const jwtMiddleware = require("../middlewares/jwt/jwt");
 const alumnoController = require("./alumnoController");
+const materiaController = require("./materiaController");
 
 const getAllUsuarios = async(req,res) => {
     try {
@@ -119,14 +120,21 @@ const loginUsr = async (req,res) =>{
     */
 const actualizarNotas = async(req,res) => {
     try {
-        const {dni,nota1,nota2} = req.body;
-        let alu = await alumnoController.findAlumnoByDni(dni);
+        const {dni,cod_materia,nota1,nota2} = req.body;
+        const alu = await alumnoController.findAlumnoByDni(dni);
         if(!alu){
             res.status(400).json({message: "El DNI No existe."})
         }else{
             //falta buscar la materia e invocar a Cursa...
-            alu = await alumnoController.actualizarNotas(alu,nota1,nota2);
-            res.status(200).json({alu})
+            const mat = await materiaController.findMateriaById(cod_materia);
+            if(!mat){
+                res.status(400).json({message: "La Materia No existe."})
+            }else{
+                const cur = await alumnoController.actualizarNotas(dni,cod_materia,nota1,nota2);
+                console.log(cur)
+                res.status(200).json({cur})
+            }
+        
         }
     } catch (error) {
         res.status(500).json({message: error})

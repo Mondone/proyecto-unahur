@@ -174,21 +174,27 @@ const findAlumnoByDni = async (dni) => {
         res.status(500).json({message: "UPS"})
     }
 }
-/* FALTA VER EL TEMA DE LA ACTUALIZACION DE MATERIA.
-const actualizarNotas = async(alu,nota1,nota2) =>{
+/* FALTA VER EL TEMA DE LA ACTUALIZACION DE MATERIA.*/
+const actualizarNotas = async(dni_alumno,cod_materia,nota_1,nota_2) =>{
+    console.log(dni_alumno, cod_materia, nota_1, nota_2)
     try {
-        alu = await models.alumno.update({
-            nota1,
-            nota2
+        const cursa = await models.cursa.update({
+            nota_1,
+            nota_2
         },{
-            where:{dni: alu.dni}
+            where: {
+                dni_alumno,
+                cod_materia
+            }
         })
-        return alu;
-    } catch (error) {
-        res.status(500).json({message: error})
+        return cursa;
+    }    
+     catch (error) {
+        console.log(error)
     }
 
-}*/
+}
+
 module.exports = {
     findAlumnoByDni,
     findAlumno,
