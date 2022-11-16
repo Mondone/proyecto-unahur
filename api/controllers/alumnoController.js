@@ -128,8 +128,9 @@ const getInscripciones = async(req,res) => {
         if(!alu){
             res.status(400).json({message: "Alumno no existente"});
         }else{
-            const inscripciones = await models.alumno.findAll({
+            const inscripciones = await models.alumno.findOne({
                                     attributes: ["dni", "nombre","apellido"],
+                                    where: {dni: dni_alumno},
                                     include: [
                                         {
                                          as: 'tiene-curs',

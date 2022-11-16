@@ -23,6 +23,28 @@ const autorizarAdmin = (req,res,next) => {
     }
 }
 
+const autorizarAlumno = (req,res,next) => {
+    const tokenHeader = req.headers["authorization"];
+
+    if(!tokenHeader){
+        res.status(400).json({message: "No hay token: No Autorizado"})
+    }else{
+        const token = tokenHeader.split(" ")[1];
+      
+        try {
+            const data = jwt.verify(token, key.ACCESS_TOKEN_SECRET);
+            console.log(data)
+            if(data.rol !== "Alum"){
+                res.status(400).json({message: "No autorizado: Debe ser Alumno para esta operación"});
+            }else{
+                next()
+            }
+        } catch (error) {
+            res.status(500).json({error})
+        }
+    }
+}
+
 const obtenerToken = async(data) => {
 
     const token = jwt.sign({
@@ -36,5 +58,6 @@ const obtenerToken = async(data) => {
 
 module.exports = {
     autorizarAdmin,
+    autorizarAlumno,
     obtenerToken
 }

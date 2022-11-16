@@ -16,7 +16,6 @@ const getAllUsuarios = async(req,res) => {
 const addUsuario = async(req,res) => {
     try {
         const{usuario,password,rol} = req.body;
-
         let usr = await findUsuarioByUsr(usuario);
 
         if(!usr){
@@ -84,7 +83,7 @@ const findUsuarioByUsr = async (usuario) =>{
         })
         return usr;
     } catch (error) {
-        res.status(500).json({message: error})
+        console.log(error)
     }
 }
 

@@ -40,7 +40,7 @@ const getAllMaterias = async(req,res) => {
 const updateMateria = async(req,res) => {
     console.log("actualizando...");
     try {
-        const cod_materia = req.params.id;
+        const {cod_materia} = req.params;
         const {nombre,id_carrera} = req.body;
        
         console.log(cod_materia,nombre,id_carrera)
@@ -80,8 +80,26 @@ const deleteMateria = async(req,res) => {
     }
 }
 
+const findMateriaByCodigo = async (req,res) => {
+ 
+        const { cod_materia } = req.params;
+        try{
+            const mat = await models.materia.findOne({
+                where: {cod_materia}
+            })
+            if(mat){
+                res.status(200).json({mat})
+            }else{
+                res.status(400).json({message: "Materia no encontrada"})
+            }   
+        }catch(err){
+            res.status(500).json({message: "UPS"})
+        }
+    
+    }
+
 const findMateriaById = async (cod_materia) => {
-console.log("Estoy aca")
+
     try{
         const mat = await models.materia.findOne({
             where: {cod_materia}
@@ -99,6 +117,7 @@ module.exports = {
     getAllMaterias,
     findMateriaById,
     updateMateria,
-    deleteMateria
+    deleteMateria,
+    findMateriaByCodigo
  }
 

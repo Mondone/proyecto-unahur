@@ -100,12 +100,31 @@ const findCarreraByNombre = async(nombre) =>{
     }
 }
 
+const findCarreraByCodigo = async(req,res) => {
+    try{
+        const { id } = req.params;
+        const car = await models.carrera.findOne({
+            where: {id}
+        })
+        if(car){
+            res.status(200).json(car) 
+        }else{
+            res.status(400).json({message: "Codigo de Carrera No Encontrado"}) 
+        }
+         
+        
+    }catch(err){
+        res.status(500).json({message: err})
+    }
+}
+//para las busquedas internas
 const findCarreraById = async(id) => {
     try{
         const car = await models.carrera.findOne({
             where: {id}
         })
-        return car;    
+        return car;   
+        
     }catch(err){
         res.status(500).json({message: err})
     }
@@ -117,5 +136,6 @@ module.exports = {
     findCarreraById,
     updateCarrera,
     deleteCarrera,
+    findCarreraByCodigo,
     materiasPorCarrera
 }
