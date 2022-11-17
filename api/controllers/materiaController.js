@@ -68,10 +68,15 @@ const deleteMateria = async(req,res) => {
         const {cod_materia} = req.params; 
         let mat = await findMateriaById(cod_materia);
         if(mat){
-            mat = await models.materia.destroy({
+            if(! await estasInscripto(cod_materia)){
+                mat = await models.materia.destroy({
                 where: {cod_materia}
             })
-            res.status(200).json({mat})
+            res.status(200).json({mat}) 
+            } else {
+                res.status(400).json({message: "Esa materia esta en Inscripciones. No se puede borrar"})
+            }
+
         }else{
             res.status(400).json({message: "El ID de esta materia no fue encontrado"})
         }
@@ -80,6 +85,25 @@ const deleteMateria = async(req,res) => {
     }
 }
 
+const estasInscripto = async (cod_materia) => {
+
+    let res = false;
+    try {
+        let cur = await models.cursa.findOne({
+            where: {cod_materia}
+        })
+
+        if(cur){
+            res =  true
+        }else{
+            res =  false
+        }
+        return res;
+
+    } catch (error) {
+        return error;
+    }
+}
 const findMateriaByCodigo = async (req,res) => {
  
         const { cod_materia } = req.params;

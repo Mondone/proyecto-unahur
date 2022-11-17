@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="r-e8Xfkd-kcNvf9qeX1_" name="Página-1">
-        <mxGraphModel dx="1078" dy="486" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1288" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -65,10 +65,10 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="28" value="Usuario" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;gradientColor=none;swimlaneFillColor=default;" vertex="1" parent="1">
-                    <mxGeometry x="630" y="140" width="160" height="120" as="geometry"/>
+                <mxCell id="28" value="Usuario" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;gradientColor=none;swimlaneFillColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="630" y="240" width="160" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="-usuario(PK)&#10;-password&#10;-rol" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="28">
+                <mxCell id="29" value="-usuario(PK)&#10;-password&#10;-rol" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="28" vertex="1">
                     <mxGeometry y="30" width="160" height="90" as="geometry"/>
                 </mxCell>
             </root>

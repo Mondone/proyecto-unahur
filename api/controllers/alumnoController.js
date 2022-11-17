@@ -61,15 +61,42 @@ const deleteAlumno = async(req,res) => {
         //hacer validacion
         let alu = await findAlumnoByDni(dni);
         if(alu){
-            alu = await models.alumno.destroy({
-                where: {dni}
-            })
-            res.status(200).json({alu})
+            console.log(dni)
+            if(! await estasInscripto(dni)){
+                //console.log(estasInscripto(dni))
+                alu = await models.alumno.destroy({
+                    where: {dni}
+                })
+                res.status(200).json({alu})
+            } else{
+                res.status(400).json({message: "No se puede eliminar, esta inscripto en materias"})
+            }
+            
         }else{
             res.status(400).json({message: "El DNI no fue encontrado"})
         }
     } catch (err) {
         res.status(500).json({message: err})
+    }
+}
+
+const estasInscripto = async (dni_alumno) => {
+    console.log(dni_alumno)
+    let res = false;
+    try {
+        let cur = await models.cursa.findOne({
+            where: {dni_alumno}
+        })
+        console.log("Doy: ", cur)
+        if(cur){
+            res =  true
+        }else{
+            res =  false
+        }
+        return res;
+
+    } catch (error) {
+        return error;
     }
 }
 

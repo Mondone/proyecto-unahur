@@ -73,8 +73,9 @@ const materiasPorCarrera = async(req,res) =>{
         const car = await findCarreraById(id);
         console.log(car)
         if(car){
-            const result = await models.carrera.findAll({
+            const result = await models.carrera.findOne({
                 attributes: ["id", "nombre"],
+                where: {id},
                 include: [{
                     as: 'tiene-mats',
                     model:models.materia}]
